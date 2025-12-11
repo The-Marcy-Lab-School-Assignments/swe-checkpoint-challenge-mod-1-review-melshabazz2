@@ -41,12 +41,13 @@ console.log(getLetterGrade(65)); // This should print "Your grade is: F"
 ### Response 1
 
 **Part A:**
-
+- Part A: The bug occurs due to variable shadowing and block scope. In each if/else we created a new block scoped variable named ``letter`` that only exist in that block. It doesnt assign a value to ``letter`` in the outerscope.
 Your response...
 
 **Part B:**
 
 Your response...
+- Part B: To fix it we would simply remove the let behind letter inside of each if/else statements scope.
 
 ---
 
@@ -70,10 +71,22 @@ console.log(originalSettings.volume);
 **Part A:**
 
 Your response...
+- Whats logged to the console is 75. This happens for multiple reasons:
+  - ``orginalSettings`` stores a reference to an object.
+  - ``newSettings = orignalSettings``  takes the reference, basically points to the same object in memory instead of creating a copy.
+  - ``newSettings.volume`` would change the object stored in memory that both variables point to which would also modify ``orignalSettings``
 
 **Part B:**
 
 Your response...
+- I would simply use the spread operator, for example: 
+```js
+const originalSettings = { volume: 50, brightness: 80 };
+const newSettings = {...originalSettings};
+newSettings.volume = 75;
+console.log(originalSettings.volume);
+```
+- Th spread operator used on line 85 would allow me to create a copy of the ``originalSettings`` object and change it inside of the copy without modifying the original.
 
 **Corrected Code:**
 
@@ -111,3 +124,6 @@ Walk through what happens in the first iteration of filter:
 ### Response 3
 
 Your response...
+- The value of ``product`` in the first iteration is the first element of the array.
+- What gets returned from the callback is ``true``.
+- Laptop would be the first element of ``itemsInStock``
